@@ -1,7 +1,7 @@
 //? Modules
 const express = require("express"),
     app = express(),
-    port = 3000,
+    port = process.env.PORT || 3000,
     path = require("path"),
     socketio = require("socket.io"),
     http = require("http"),
@@ -14,9 +14,9 @@ io.on(
         socket.on("send-location", function (data) {
             io.emit("recieve-location", { id: socket.id, ...data });
         });
-       socket.on("disconnect", ()=>{
-        io.emit("user-disconnected", socket.id)
-       })
+        socket.on("disconnect", () => {
+            io.emit("user-disconnected", socket.id)
+        })
     },
     (error) => {
         console.error(error);
@@ -36,3 +36,6 @@ app.use(express.static(path.join(__dirname, "public")));
 server.listen(port, () => {
     console.log(`App is running on http://localhost:${port}`);
 });
+
+
+module.exports = app;
