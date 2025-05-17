@@ -1,7 +1,8 @@
 //? Modules
+require('dotenv').config();
 const express = require("express"),
     app = express(),
-    port = process.env.PORT || 3000,
+    PORT = process.env.PORT || 8000,
     path = require("path"),
     socketio = require("socket.io"),
     http = require("http"),
@@ -33,8 +34,8 @@ app.get("/", (req, res) => {
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
-server.listen(port, () => {
-    console.log(`App is running on http://localhost:${port}`);
+server.listen(PORT, () => {
+    console.log(`App is running on http://localhost:${PORT}`);
 });
 
 
